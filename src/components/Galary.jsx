@@ -25,20 +25,20 @@ export default function Galary() {
   return (
     <div>
       <Navbar length={dataLength} handleDelete={handleDelete} />
-
-      <div className="container mx-auto grid grid-cols-5 gap-2 mt-5">
+      <div className="container grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-2 mt-5">
         {data.map((image) => (
           <div
             key={image.id}
             className={
               data.indexOf(image) === 0
-                ? "row-span-2 col-span-2 " + commonStyle
+                ? "md:row-span-2 md:col-span-2 " +
+                  commonStyle
                 : "" + commonStyle
             }
           >
             <input
               type="checkbox"
-              className="absolute top-5 left-5 z-50 cursor-pointer"
+              className="absolute top-5 left-5 z-50 cursor-pointer w-4 h-4"
               name="imageSelection"
               checked={image.checked}
               onChange={() => handleInputOnChange(image)}

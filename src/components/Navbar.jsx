@@ -11,7 +11,7 @@ export default function Navbar({ length, handleDelete }) {
               checked={true}
               readOnly
               id=""
-              className="mr-1"
+              className="mr-1 w-4 h-4"
             />
             {length} {length > 1 ? "Files" : "File"} Selected
           </div>
