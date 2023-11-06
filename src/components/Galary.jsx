@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { data as imageData } from "../data/data";
 import Navbar from "./Navbar";
-import Image from "./Image";
+import ImageList from "./ImageList";
+import { useState } from "react";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { arrayMove } from "@dnd-kit/sortable";
+import { data as imageData } from "../data/data";
 
 export default function Galary() {
   const [data, setData] = useState(imageData);
-  const commonStyle = "relative border-2 rounded-lg";
 
   const handleInputOnChange = (image) => {
     const newImage = { ...image, checked: !image.checked };
@@ -20,33 +21,24 @@ export default function Galary() {
     setData(newData);
   };
 
+  const onDragEnd = (event) => {
+    const { active, over } = event;
+    if (active.id === over.id) return;
+    setData((data) => {
+      const oldIndex = data.findIndex((d) => d.id === active.id);
+      const newIndex = data.findIndex((d) => d.id === over.id);
+      return arrayMove(data, oldIndex, newIndex);
+    });
+  };
+
   const dataLength = data.filter((d) => d.checked).length;
 
   return (
-    <div>
+    <div className="mx-10 mb-10 mt-5">
       <Navbar length={dataLength} handleDelete={handleDelete} />
-      <div className="container grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-2 mt-5">
-        {data.map((image) => (
-          <div
-            key={image.id}
-            className={
-              data.indexOf(image) === 0
-                ? "md:row-span-2 md:col-span-2 " +
-                  commonStyle
-                : "" + commonStyle
-            }
-          >
-            <input
-              type="checkbox"
-              className="absolute top-5 left-5 z-50 cursor-pointer w-4 h-4"
-              name="imageSelection"
-              checked={image.checked}
-              onChange={() => handleInputOnChange(image)}
-            />
-            <Image image={image} />
-          </div>
-        ))}
-      </div>
+      <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+        <ImageList data={data} handleInputOnChange={handleInputOnChange} />
+      </DndContext>
     </div>
   );
 }
