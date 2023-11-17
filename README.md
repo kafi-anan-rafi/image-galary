@@ -1,8 +1,11 @@
-# React + Vite
+## ImageGalary Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features:
+1. Select images
+2. Delete Images
+3. Drag and Drop
 
-Currently, two official plugins are available:
+For the first time in my project, I have used drag and drop functionality. I have made used the "DND kit" library to implement drag and drop functionality. It was really fun building this project.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live link:
+https://shiny-gecko-d9e270.netlify.app/
